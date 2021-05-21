@@ -63,34 +63,34 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Нажатие на крестик закрывает программу
 
         /* Текстовые поля */
-        settingUpTextField(textField, 265, 60, 10, 10, font, true, true);
-        settingUpTextField(resultText, 265, 60, 10, 70, font3, true, true);
+        configTextField(textField, 265, 60, 10, 10, font, true, true);
+        configTextField(resultText, 265, 60, 10, 70, font3, true, true);
 
         /* Кнопки */
-        settingUpButton(percent, 60, 60, 10, 490, font2, true);
-        settingUpButton(b0, 60, 60, 80, 490, font, true);
-        settingUpButton(point, 60, 60, 150, 490, font, true);
-        settingUpButton(b1, 60, 60, 10, 420, font, true);
-        settingUpButton(b2, 60, 60, 80, 420, font, true);
-        settingUpButton(b3, 60, 60, 150, 420, font, true);
-        settingUpButton(b4, 60, 60, 10, 350, font, true);
-        settingUpButton(b5, 60, 60, 80, 350, font, true);
-        settingUpButton(b6, 60, 60, 150, 350, font, true);
-        settingUpButton(b7, 60, 60, 10, 280, font, true);
-        settingUpButton(b8, 60, 60, 80, 280, font, true);
-        settingUpButton(b9, 60, 60, 150, 280, font, true);
-        settingUpButton(clear, 60, 60, 10, 210, font, true);
-        settingUpButton(mul, 60, 60, 80, 210, font, true);
-        settingUpButton(div, 60, 60, 150, 210, font, true);
-        settingUpButton(bac, 60, 60, 220, 210, font3, true);
-        settingUpButton(sub, 60, 60, 220, 280, font, true);
-        settingUpButton(add, 60, 60, 220, 350, font, true);
-        settingUpButton(res, 60, 130, 220, 420, font, true);
-        settingUpButton(change, 60, 60, 10, 140, font3, true);
+        configButton(percent, 60, 60, 10, 490, font2, true);
+        configButton(b0, 60, 60, 80, 490, font, true);
+        configButton(point, 60, 60, 150, 490, font, true);
+        configButton(b1, 60, 60, 10, 420, font, true);
+        configButton(b2, 60, 60, 80, 420, font, true);
+        configButton(b3, 60, 60, 150, 420, font, true);
+        configButton(b4, 60, 60, 10, 350, font, true);
+        configButton(b5, 60, 60, 80, 350, font, true);
+        configButton(b6, 60, 60, 150, 350, font, true);
+        configButton(b7, 60, 60, 10, 280, font, true);
+        configButton(b8, 60, 60, 80, 280, font, true);
+        configButton(b9, 60, 60, 150, 280, font, true);
+        configButton(clear, 60, 60, 10, 210, font, true);
+        configButton(mul, 60, 60, 80, 210, font, true);
+        configButton(div, 60, 60, 150, 210, font, true);
+        configButton(bac, 60, 60, 220, 210, font3, true);
+        configButton(sub, 60, 60, 220, 280, font, true);
+        configButton(add, 60, 60, 220, 350, font, true);
+        configButton(res, 60, 130, 220, 420, font, true);
+        configButton(change, 60, 60, 10, 140, font3, true);
     }
 
     /* настройка текстового поля */
-    public void settingUpTextField(TextField name, int width, int height, int xPosition, int yPosition, Font font, boolean visible, boolean editable) {
+    public void configTextField(TextField name, int width, int height, int xPosition, int yPosition, Font font, boolean visible, boolean editable) {
         name.setSize(width, height);            // размер текстового поля
         name.setLocation(xPosition, yPosition); // позиция текстового поля в окне
         name.setFont(font);                     // установить шрифт
@@ -100,7 +100,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     }
 
     /* настройка кнопки */
-    public void settingUpButton(JButton name, int width, int height, int xPosition, int yPosition, Font font, boolean visible) {
+    public void configButton(JButton name, int width, int height, int xPosition, int yPosition, Font font, boolean visible) {
         name.setSize(width, height);            // размер кнопки
         name.setLocation(xPosition, yPosition); // позиция кнопки в окне
         name.setFont(font);                     // шрифт
