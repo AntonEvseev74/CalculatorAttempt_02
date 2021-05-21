@@ -62,7 +62,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         setLocation(300, 150);             // Расположение окна
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Нажатие на крестик закрывает программу
 
-        /* Текстовое поле */
+        /* Текстовые поля */
         settingUpTextField(textField, 265, 60, 10, 10, font, true, true);
         settingUpTextField(resultText, 265, 60, 10, 70, font3, true, true);
 
@@ -260,12 +260,9 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 B = Double.parseDouble(text);
                 dResult = A + B;
                 if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    iResult = (int) dResult;
-                    textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(iResult);
+                    setTextToTextFieldIfInteger();
                 } else {
-                    textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(dResult);
+                    setTextToTextFieldIfDouble();
                 }
                 textInResultText.append("=");
                 textInResultText.append(text);
@@ -276,12 +273,9 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 B = Double.parseDouble(text);
                 dResult = A - B;
                 if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    iResult = (int) dResult;
-                    textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(iResult);
+                    setTextToTextFieldIfInteger();
                 } else {
-                    textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(dResult);
+                    setTextToTextFieldIfDouble();
                 }
                 textInResultText.append("=");
                 textInResultText.append(text);
@@ -292,12 +286,9 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 B = Double.parseDouble(text);
                 dResult = A * B;
                 if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    iResult = (int) dResult;
-                    textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(iResult);
+                    setTextToTextFieldIfInteger();
                 } else {
-                    textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(dResult);
+                    setTextToTextFieldIfDouble();
                 }
                 textInResultText.append("=");
                 textInResultText.append(text);
@@ -308,12 +299,9 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 B = Double.parseDouble(text);
                 dResult = A / B;
                 if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    iResult = (int) dResult;
-                    textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(iResult);
+                    setTextToTextFieldIfInteger();
                 } else {
-                    textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(dResult);
+                    setTextToTextFieldIfDouble();
                 }
                 textInResultText.append("=");
                 textInResultText.append(text);
@@ -324,18 +312,28 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 B = Double.parseDouble(text);
                 dResult = B / 100 * A; // 10 % от 100 = 10
                 if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    iResult = (int) dResult;
-                    textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(iResult);
+                    setTextToTextFieldIfInteger();
                 } else {
-                    textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
-                    text = String.valueOf(dResult);
+                    setTextToTextFieldIfDouble();
                 }
                 textInResultText.append("=");
                 textInResultText.append(text);
                 resultText.setText(textInResultText.toString());
             }
         }
+    }
+
+    /* установить текст в текстовое поле, если результат - это целое число */
+    private void setTextToTextFieldIfInteger () {
+        iResult = (int) dResult;
+        textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
+        text = String.valueOf(iResult);
+    }
+
+    /* установить текст в текстовое поле, если результат - это вещественное число */
+    private void setTextToTextFieldIfDouble () {
+        textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
+        text = String.valueOf(dResult);
     }
 
     // метод удалить последний символ в строке
