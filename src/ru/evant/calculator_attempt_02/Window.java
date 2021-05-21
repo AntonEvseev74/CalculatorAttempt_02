@@ -252,7 +252,6 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
     // метод реализущий работу знака равно
     private void calculate(ActionEvent e) {
-
         if (e.getSource() == res) {
             double B;
             // + сложение
@@ -264,9 +263,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 } else {
                     setTextToTextFieldIfDouble();
                 }
-                textInResultText.append("=");
-                textInResultText.append(text);
-                resultText.setText(textInResultText.toString());
+                setTextToResultField();
             }
             // - вычитание
             if (op == '-') {
@@ -277,9 +274,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 } else {
                     setTextToTextFieldIfDouble();
                 }
-                textInResultText.append("=");
-                textInResultText.append(text);
-                resultText.setText(textInResultText.toString());
+                setTextToResultField();
             }
             // * умножение
             if (op == '*') {
@@ -290,9 +285,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 } else {
                     setTextToTextFieldIfDouble();
                 }
-                textInResultText.append("=");
-                textInResultText.append(text);
-                resultText.setText(textInResultText.toString());
+                setTextToResultField();
             }
             // / деление
             if (op == '/') {
@@ -303,9 +296,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 } else {
                     setTextToTextFieldIfDouble();
                 }
-                textInResultText.append("=");
-                textInResultText.append(text);
-                resultText.setText(textInResultText.toString());
+                setTextToResultField();
             }
             // % процент
             if (op == '%') {
@@ -316,30 +307,36 @@ public class Window extends JFrame implements WindowListener, ActionListener {
                 } else {
                     setTextToTextFieldIfDouble();
                 }
-                textInResultText.append("=");
-                textInResultText.append(text);
-                resultText.setText(textInResultText.toString());
+                setTextToResultField();
             }
         }
     }
 
-    /* установить текст в текстовое поле, если результат - это целое число */
+    /* установить текст в текстовое поле (resultText) */
+    private void setTextToResultField () {
+        textInResultText.append("=");
+        textInResultText.append(text);
+        resultText.setText(textInResultText.toString());
+    }
+
+    /* установить текст в текстовое поле (textField), если результат - это целое число */
     private void setTextToTextFieldIfInteger () {
         iResult = (int) dResult;
         textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(iResult);
     }
 
-    /* установить текст в текстовое поле, если результат - это вещественное число */
+    /* установить текст в текстовое поле (textField), если результат - это вещественное число */
     private void setTextToTextFieldIfDouble () {
         textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(dResult);
     }
 
-    // метод удалить последний символ в строке
+    /* метод удалить последний символ в строке */
     private String deleteLastSymbol(String str) {
         return str.substring(0, str.length() - 1);
     }
+
 
     @Override
     public void windowOpened(WindowEvent e) {
