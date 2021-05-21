@@ -71,177 +71,36 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         add(textField);                           // добавить в окно программы
 
         // Кнопки
-      /*  percent.setSize(60, 60);    // размер текстового поля
-        percent.setLocation(10, 490);       // размер текстового поля
-        percent.setFont(font2);                   // установить шрифт установить шрифт
-        percent.setVisible(true);                 // отобразить на экране
-        add(percent);                             // добавить в окно программы  */
         settingUpButton(percent, 60, 60 , 10, 490, font2, true);
-
-      /*  b0.setSize(60, 60);
-        b0.setLocation(80, 490);
-        b0.setFont(font);
-        b0.setVisible(true);
-        add(b0); */
         settingUpButton(b0, 60, 60 , 80, 490, font, true);
-
-      /*  point.setSize(60, 60);
-        point.setLocation(150, 490);
-        point.setFont(font); // установить шрифт
-        point.setVisible(true);
-        add(point); */
         settingUpButton(point, 60, 60 , 150, 490, font, true);
-
-       /* b1.setSize(60, 60);
-        b1.setLocation(10, 420);
-        b1.setFont(font); // установить шрифт
-        b1.setVisible(true);
-        add(b1); */
         settingUpButton(b1, 60, 60 , 10, 420, font, true);
-
-     /*   b2.setSize(60, 60);
-        b2.setLocation(80, 420);
-        b2.setFont(font); // установить шрифт
-        b2.setVisible(true);
-        add(b2); */
         settingUpButton(b2, 60, 60 , 80, 420, font, true);
-
-      /*  b3.setSize(60, 60);
-        b3.setLocation(150, 420);
-        b3.setFont(font); // установить шрифт
-        b3.setVisible(true);
-        add(b3); */
         settingUpButton(b3, 60, 60 , 150, 420, font, true);
-
-      /*  b4.setSize(60, 60);
-        b4.setLocation(10, 350);
-        b4.setFont(font); // установить шрифт
-        b4.setVisible(true);
-        add(b4); */
         settingUpButton(b4, 60, 60 , 10, 350, font, true);
-
-     /*   b5.setSize(60, 60);
-        b5.setLocation(80, 350);
-        b5.setFont(font); // установить шрифт
-        b5.setVisible(true);
-        add(b5); */
         settingUpButton(b5, 60, 60 , 80, 350, font, true);
-
-      /*  b6.setSize(60, 60);
-        b6.setLocation(150, 350);
-        b6.setFont(font); // установить шрифт
-        b6.setVisible(true);
-        add(b6); */
         settingUpButton(b6, 60, 60 , 150, 350, font, true);
-
-      /*  b7.setSize(60, 60);
-        b7.setLocation(10, 280);
-        b7.setFont(font); // установить шрифт
-        b7.setVisible(true);
-        add(b7); */
         settingUpButton(b7, 60, 60 , 10, 280, font, true);
-
-      /*  b8.setSize(60, 60);
-        b8.setLocation(80, 280);
-        b8.setFont(font); // установить шрифт
-        b8.setVisible(true);
-        add(b8); */
         settingUpButton(b8, 60, 60 , 80, 280, font, true);
-
-      /*  b9.setSize(60, 60);
-        b9.setLocation(150, 280);
-        b9.setFont(font); // установить шрифт
-        b9.setVisible(true);
-        add(b9); */
         settingUpButton(b9, 60, 60 , 150, 280, font, true);
-
-      /*  clear.setSize(60, 60);
-        clear.setLocation(10, 210);
-        clear.setFont(font); // установить шрифт
-        clear.setVisible(true);
-        add(clear); */
         settingUpButton(clear, 60, 60 , 10, 210, font, true);
-
-       /* mul.setSize(60, 60);
-        mul.setLocation(80, 210);
-        mul.setFont(font); // установить шрифт
-        mul.setVisible(true);
-        add(mul); */
         settingUpButton(mul, 60, 60 , 80, 210, font, true);
-
-       /* div.setSize(60, 60);
-        div.setLocation(150, 210);
-        div.setFont(font); // установить шрифт
-        div.setVisible(true);
-        add(div); */
         settingUpButton(div, 60, 60 , 150, 210, font, true);
-
-       /* bac.setSize(60, 60);
-        bac.setLocation(220, 210);
-        bac.setFont(font3); // установить шрифт
-        bac.setVisible(true);
-        add(bac); */
         settingUpButton(bac, 60, 60 , 220, 210, font3, true);
-
-     /*   sub.setSize(60, 60);
-        sub.setLocation(220, 280);
-        sub.setFont(font); // установить шрифт
-        sub.setVisible(true);
-        add(sub);*/
         settingUpButton(sub, 60, 60 , 220, 280, font, true);
-
-       /* add.setSize(60, 60);
-        add.setLocation(220, 350);
-        add.setFont(font); // установить шрифт
-        add.setVisible(true);
-        add(add);*/
         settingUpButton(add, 60, 60 , 220, 350, font, true);
-
-       /* res.setSize(60, 130);
-        res.setLocation(220, 420);
-        res.setFont(font); // установить шрифт
-        res.setVisible(true);
-        add(res);*/
         settingUpButton(res, 60, 130 , 220, 420, font, true);
-
- /*       change.setSize(60, 60);
-        change.setLocation(10, 140);
-        change.setFont(font3); // установить шрифт
-        change.setVisible(true);
-        add(change); */
         settingUpButton(change, 60, 60 , 10, 140, font3, true);
-
-        //подключить кнопки к обработчику событий
-    /*    percent.addActionListener(this);
-        b0.addActionListener(this);
-        point.addActionListener(this);
-        b1.addActionListener(this);
-        b2.addActionListener(this);
-        b3.addActionListener(this);
-        b4.addActionListener(this);
-        b5.addActionListener(this);
-        b6.addActionListener(this);
-        b7.addActionListener(this); */
-      /*  b8.addActionListener(this); */
-      /*  b9.addActionListener(this); */
-      /*  clear.addActionListener(this); */
-      /*  mul.addActionListener(this); */
-     /*   div.addActionListener(this); */
-      /*  bac.addActionListener(this); */
-      /*  sub.addActionListener(this); */
-      /*  add.addActionListener(this); */
-      /*  res.addActionListener(this); */
-        /* change.addActionListener(this); */
     }
 
     /* настройки кнопки */
     public void settingUpButton(JButton name, int width, int height, int xPosition, int yPosition, Font font, boolean visible) {
-        name.setSize(width, height);
-        name.setLocation(xPosition, yPosition);
-        name.setFont(font);
-        name.setVisible(visible);
-        add(name);
-        name.addActionListener(this);
+        name.setSize(width, height);            // размер кнопки
+        name.setLocation(xPosition, yPosition); // позиция кнопки в окне
+        name.setFont(font);                     // шрифт
+        name.setVisible(visible);               // видимость (да/нет)
+        add(name);                              // добавить в окно
+        name.addActionListener(this);        // подключить к обработчику событий
     }
 
     // обработчик событий
