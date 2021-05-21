@@ -4,6 +4,7 @@ package ru.evant.calculator_attempt_02;
         Деление:
             Вывод лишних символов
             Реализовать проверку деления на 0
+       При вводе чисел, вывд лишних символов в поле resultText
  */
 
 /* Окно программы */
@@ -43,7 +44,6 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     private final JButton change = new JButton("+/-");    // изменить знак числа - => + или + -> -
 
     private double A = 0;       // вещественное число
-    // private double B = 0;    // вещественное число
     private double dResult = 0; // результат - вещественное число
     private int iResult = 0;    // результат - целое число
     private char op;            // оператор (+, -, *, / ...)
@@ -165,6 +165,8 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         if (e.getSource() == b8) {
             text = text + b8.getText();
             textField.setText(text);
+            textInResultText.append(text);
+            resultText.setText(textInResultText.toString());
         }
         if (e.getSource() == b9) {
             text = text + b9.getText();
@@ -179,7 +181,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             resultText.setText(textInResultText.toString());
         }
 
-        // операции
+        /* операции */
         if (e.getSource() == change) {
             textInResultText.append(text);
             resultText.setText(textInResultText.toString());
@@ -198,6 +200,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             textInResultText.append(text);
             resultText.setText(textInResultText.toString());
         } // изменить + на - и наоборот
+
         if (e.getSource() == percent) {
             // написать код
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
@@ -205,14 +208,17 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             text = "";
             op = '%';
         } // процент ( 10% от 100 = 10)
+
         if (e.getSource() == point) {
             text = text + point.getText();
             textField.setText(text);
         } // точка
+
         if (e.getSource() == bac) {
             text = deleteLastSymbol(text);
             textField.setText(text);
         } // bac - backspace - удалить последний символ
+
         if (e.getSource() == add) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             textField.setText(text + add.getText());
@@ -221,6 +227,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             textInResultText.append("+");
             resultText.setText(textInResultText.toString());
         } // add - сложение
+
         if (e.getSource() == sub) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             textField.setText(text + sub.getText());
@@ -229,6 +236,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             textInResultText.append("-");
             resultText.setText(textInResultText.toString());
         } // sub - вычитание
+
         if (e.getSource() == mul) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             textField.setText(text + mul.getText());
@@ -237,6 +245,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             textInResultText.append("*");
             resultText.setText(textInResultText.toString());
         } // mul - умножение
+
         if (e.getSource() == div) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             textField.setText(text + div.getText());
@@ -250,65 +259,59 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         calculate(e);
     }
 
-    // метод реализущий работу знака равно
+    /* метод реализущий работу знака равно */
     private void calculate(ActionEvent e) {
         if (e.getSource() == res) {
-            double B;
+            double B; // Число B
             // + сложение
             if (op == '+') {
-                B = Double.parseDouble(text);
+                B = Double.parseDouble(text); // Преобразовать тект в число B
                 dResult = A + B;
-                if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    setTextToTextFieldIfInteger();
-                } else {
-                    setTextToTextFieldIfDouble();
-                }
-                setTextToResultField();
+                printResult();
             }
             // - вычитание
             if (op == '-') {
                 B = Double.parseDouble(text);
                 dResult = A - B;
-                if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    setTextToTextFieldIfInteger();
-                } else {
-                    setTextToTextFieldIfDouble();
-                }
-                setTextToResultField();
+                printResult();
             }
             // * умножение
             if (op == '*') {
                 B = Double.parseDouble(text);
                 dResult = A * B;
-                if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    setTextToTextFieldIfInteger();
-                } else {
-                    setTextToTextFieldIfDouble();
-                }
-                setTextToResultField();
+                printResult();
             }
             // / деление
             if (op == '/') {
                 B = Double.parseDouble(text);
                 dResult = A / B;
-                if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    setTextToTextFieldIfInteger();
-                } else {
-                    setTextToTextFieldIfDouble();
-                }
-                setTextToResultField();
+                printResult();
             }
             // % процент
             if (op == '%') {
                 B = Double.parseDouble(text);
                 dResult = B / 100 * A; // 10 % от 100 = 10
-                if (dResult % 1 == 0) { // если остаток от деления равен 0
-                    setTextToTextFieldIfInteger();
-                } else {
-                    setTextToTextFieldIfDouble();
-                }
-                setTextToResultField();
+                printResult();
             }
+        }
+    }
+
+    /* Вывести результат */
+    private void printResult () {
+        checkingForAnInteger();
+        setTextToResultField();
+    }
+
+    /*
+    * Блок
+    * если целое число - вывод целого числа (без точки и знаков после точки)
+    * иначе - вывод вещественного числа (с точкой и знаками после точки)
+    */
+    private void checkingForAnInteger (){
+        if (dResult % 1 == 0) { // если остаток от деления равен 0
+            setTextToTextFieldIfInteger();
+        } else {
+            setTextToTextFieldIfDouble();
         }
     }
 
