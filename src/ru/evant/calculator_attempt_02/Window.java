@@ -1,5 +1,11 @@
 package ru.evant.calculator_attempt_02;
 
+/* Ошибки:
+        Деление:
+            Вывод лишних символов
+            Реализовать проверку деления на 0
+ */
+
 /* Окно программы */
 
 import javax.swing.*;
@@ -43,11 +49,12 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     private char op;            // оператор (+, -, *, / ...)
 
     public Window() {
-        Font font = new Font("Impact", Font.BOLD, 40); // шрифт
-        Font font2 = new Font("Impact", Font.BOLD, 35); // шрифт
-        Font font3 = new Font("Impact", Font.BOLD, 15); // шрифт
+        /* Шрифты */
+        Font font = new Font("Impact", Font.BOLD, 40); // шрифт, жирный, размер
+        Font font2 = new Font("Impact", Font.BOLD, 35);// шрифт, жирный, размер
+        Font font3 = new Font("Impact", Font.BOLD, 15);// шрифт, жирный, размер
 
-        // Окно программы
+        /* Окно программы */
         setLayout(null);
         setSize(305, 600);         // размер окна
         setVisible(true);                        // отобразить на экране
@@ -55,22 +62,23 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         setLocation(300, 150);             // Расположение окна
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Нажатие на крестик закрывает программу
 
-        //////////////////////
-        resultText.setSize(265, 60); // размер текстового поля
-        resultText.setLocation(10, 70);      // размер текстового поля
-        resultText.setFont(font3);                  // установить шрифт
-        resultText.setVisible(true);               // отобразить на экране
-        resultText.setEditable(false);
-        add(resultText);                           // добавить в окно программы
-
-        // Текстовое поле
-        textField.setSize(265, 60); // размер текстового поля
+        /* Текстовое поле */
+    /*    textField.setSize(265, 60); // размер текстового поля
         textField.setLocation(10, 10);      // размер текстового поля
         textField.setFont(font);                  // установить шрифт
         textField.setVisible(true);               // отобразить на экране
-        add(textField);                           // добавить в окно программы
+        add(textField);                           // добавить в окно программы */
+        settingUpTextField(textField,265,60,10,10,font,true,true);
 
-        // Кнопки
+    /*    resultText.setSize(265, 60); // размер текстового поля
+        resultText.setLocation(10, 70);      // размер текстового поля
+        resultText.setFont(font3);                 // установить шрифт
+        resultText.setVisible(true);               // отобразить на экране
+        resultText.setEditable(false);
+        add(resultText);                           // добавить в окно программы */
+        settingUpTextField(resultText,265,60,10,70,font3,true,true);
+
+       /* Кнопки */
         settingUpButton(percent, 60, 60 , 10, 490, font2, true);
         settingUpButton(b0, 60, 60 , 80, 490, font, true);
         settingUpButton(point, 60, 60 , 150, 490, font, true);
@@ -91,6 +99,16 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         settingUpButton(add, 60, 60 , 220, 350, font, true);
         settingUpButton(res, 60, 130 , 220, 420, font, true);
         settingUpButton(change, 60, 60 , 10, 140, font3, true);
+    }
+
+    /* настройки кнопки */
+    public void settingUpTextField(TextField name, int width, int height, int xPosition, int yPosition, Font font, boolean visible, boolean editable) {
+        name.setSize(width, height);            // размер текстового поля
+        name.setLocation(xPosition, yPosition); // позиция текстового поля в окне
+        name.setFont(font);                     // установить шрифт
+        name.setVisible(visible);               // видимость (да/нет)
+        name.setEditable(editable);             // редактируемое поле (да/нет)
+        add(name);                              // добавить в окно
     }
 
     /* настройки кнопки */
