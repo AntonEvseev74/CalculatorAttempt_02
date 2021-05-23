@@ -45,7 +45,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
     private double A = 0;       // вещественное число
     private double dResult = 0; // результат - вещественное число
-    private int iResult = 0;    // результат - целое число
+    private long iResult = 0;    // результат - целое число
     private char op;            // оператор (+, -, *, / ...)
 
     /* + Главное окно программы */
@@ -110,57 +110,64 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         name.addActionListener(this);        // подключить к обработчику событий
     }
 
-    /* обработчик событий */
+    /* + обработчик событий */
     @Override
     public void actionPerformed(ActionEvent e) {
         /* +  Цифры */
         numberButtonListener(e);
 
-        /* операции */
+        /* + Операции */
+        operationButtonListener(e);
+
+        /* + Равно */
+        calculateButtonListener(e);
+    }
+
+    /* + Слушатель кнопок математических операций (Обработка нажатия кнопок: +, -, *, /, ., % и т.д.) */
+    private void operationButtonListener(ActionEvent e) {
+        /* + C - Clear - Очистить все поля */
         if (e.getSource() == clear) {
-            text = "";
-            inputTextField.setText(text);
-            textResult.setLength(0);//append(text);
-            outputTextField.setText(textResult.toString());
+            textResult.setLength(0);    // Очистка строки
+            text = "";                  // Очистка строки
+            addInString(text, textResult.toString());
         }
 
+        /* + Изменить знак числа (+/-) (5 = -5, и наоборот -5 = 5) */
         if (e.getSource() == change) {
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
             A = Double.parseDouble(text);
             A *= -1;
-            if (A % 1 == 0) {
-                iResult = (int) A;
-                inputTextField.setText(String.valueOf(iResult));
-                text = String.valueOf(iResult);
-            } else {
-                dResult = A;
-                inputTextField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
-                text = String.valueOf(dResult);
-            }
-            textResult.setLength(0); // доработать
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-        } // изменить + на - и наоборот
+            textResult.setLength(0);
+            text = String.valueOf(A);
+            addInString(text, text);
+        }
 
+        /* + Процент (%) (100% = 1 (100/100=1)) */
         if (e.getSource() == percent) {
-            // написать код
-            A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            inputTextField.setText(text + percent.getText());
-            text = "";
-            op = '%';
+            A = Double.parseDouble(text);
+            A /= 100;
+            textResult.setLength(0);
+            text = String.valueOf(A);
+            addInString(text, text);
         } // процент ( 10% от 100 = 10)
 
+        /* Точка */
         if (e.getSource() == point) {
-            text = text + point.getText();
-            inputTextField.setText(text);
-        } // точка
+            /* еслив строке нет символа точка (.) мы добавляем точку в строку, иначе ничего ни делаем */
+            if(text.indexOf('.') == -1) {
+                text = text + point.getText();
+                addInString(text, point.getText());
+            }
+        }
 
+        /* + Backspace - удалить последний введенный символ */
         if (e.getSource() == bac) {
             text = deleteLastSymbol(text);
-            inputTextField.setText(text);
-        } // bac - backspace - удалить последний символ
+            int lastChar = textResult.length()-1;
+            textResult.deleteCharAt(lastChar);          // удалить последний символ в строке
+            addInString(text,"");
+        }
 
+        /* + Сложение */
         if (e.getSource() == add) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             inputTextField.setText(text + add.getText());
@@ -168,8 +175,9 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             op = '+';
             textResult.append("+");
             outputTextField.setText(textResult.toString());
-        } // add - сложение
+        }
 
+        /* + Вычитание */
         if (e.getSource() == sub) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             inputTextField.setText(text + sub.getText());
@@ -177,8 +185,9 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             op = '-';
             textResult.append("-");
             outputTextField.setText(textResult.toString());
-        } // sub - вычитание
+        }
 
+        /* + Умножение */
         if (e.getSource() == mul) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             inputTextField.setText(text + mul.getText());
@@ -186,8 +195,9 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             op = '*';
             textResult.append("*");
             outputTextField.setText(textResult.toString());
-        } // mul - умножение
+        }
 
+        /* + Деление */
         if (e.getSource() == div) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
             inputTextField.setText(text + div.getText());
@@ -195,10 +205,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             op = '/';
             textResult.append("/");
             outputTextField.setText(textResult.toString());
-        } // div - деление
-
-
-        calculate(e);
+        }
     }
 
     /* + Слушатель кнопок цифр (Обработка нажатия кнопок цифр) */
@@ -245,8 +252,8 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         }
     }
 
-    /* метод реализущий работу знака равно */
-    private void calculate(ActionEvent e) {
+    /* + Слушатель кнопки вычислить (это знак равно (=)) */
+    private void calculateButtonListener(ActionEvent e) {
         if (e.getSource() == res) {
             double B; // Число B
             // + сложение
@@ -301,13 +308,6 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         }
     }
 
-    /* установить текст в текстовое поле (resultText) */
-    private void setTextToResultField () {
-        textResult.append("=");
-        textResult.append(text);
-        outputTextField.setText(textResult.toString());
-    }
-
 
     private void addInString(String text, String builder) {
         textResult.append(builder);         // Добавить в строку новый элемент
@@ -325,20 +325,27 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         outputTextField.setText(textResult.toString());
     }
 
-    /* установить текст в текстовое поле (textField), если результат - это целое число */
+    /* установить текст в текстовое поле (resultText) */
+    private void setTextToResultField () {
+        textResult.append("=");
+        textResult.append(text);
+        outputTextField.setText(textResult.toString());
+    }
+
+    /* Установить текст в текстовое поле (textField), если результат - это целое число */
     private void setTextToTextFieldIfInteger () {
-        iResult = (int) dResult;
+        iResult = (long) dResult;
         inputTextField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(iResult);
     }
 
-    /* установить текст в текстовое поле (textField), если результат - это вещественное число */
+    /* Установить текст в текстовое поле (textField), если результат - это вещественное число */
     private void setTextToTextFieldIfDouble () {
         inputTextField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(dResult);
     }
 
-    /* метод удалить последний символ в строке */
+    /* Удалить последний символ в строке типа String */
     private String deleteLastSymbol(String str) {
         return str.substring(0, str.length() - 1);
     }
