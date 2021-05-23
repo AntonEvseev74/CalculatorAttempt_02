@@ -50,6 +50,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     private int iResult = 0;    // результат - целое число
     private char op;            // оператор (+, -, *, / ...)
 
+    /* + Главное окно программы */
     public Window() {
         /* + Шрифты */
         Font font = new Font("Impact", Font.BOLD, 40); // шрифт, жирный, размер
@@ -114,107 +115,52 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     /* обработчик событий */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Цифры
+        /* +  Цифры */
+        numberButtonListener(e);
+        /*
         if (e.getSource() == b0) {
             text = text + b0.getText();
             addInString(text, b0.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b1) {
             text = text + b1.getText();
             addInString(text, b1.getText());
-
-            /*
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
-             */
         }
         if (e.getSource() == b2) {
             text = text + b2.getText();
             addInString(text, b2.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b3) {
             text = text + b3.getText();
             addInString(text, b3.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b4) {
             text = text + b4.getText();
             addInString(text, b4.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b5) {
             text = text + b5.getText();
             addInString(text, b5.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b6) {
             text = text + b6.getText();
             addInString(text, b6.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b7) {
             text = text + b7.getText();
             addInString(text, b7.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b8) {
             text = text + b8.getText();
             addInString(text, b8.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
         if (e.getSource() == b9) {
             text = text + b9.getText();
             addInString(text, b9.getText());
-            /*
-            inputTextField.setText(text);
-            textResult.append(text);
-            outputTextField.setText(textResult.toString());
-
-             */
         }
+        */
+
+        /* операции */
         if (e.getSource() == clear) {
             text = "";
             inputTextField.setText(text);
@@ -222,7 +168,6 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             outputTextField.setText(textResult.toString());
         }
 
-        /* операции */
         if (e.getSource() == change) {
             textResult.append(text);
             outputTextField.setText(textResult.toString());
@@ -298,6 +243,50 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
 
         calculate(e);
+    }
+
+    /* + Слушатель кнопок цифр (Обработка нажатия кнопок цифр) */
+    private void numberButtonListener(ActionEvent e) {
+        if (e.getSource() == b0) {
+            text = text + b0.getText();
+            addInString(text, b0.getText());
+        }
+        if (e.getSource() == b1) {
+            text = text + b1.getText();
+            addInString(text, b1.getText());
+        }
+        if (e.getSource() == b2) {
+            text = text + b2.getText();
+            addInString(text, b2.getText());
+        }
+        if (e.getSource() == b3) {
+            text = text + b3.getText();
+            addInString(text, b3.getText());
+        }
+        if (e.getSource() == b4) {
+            text = text + b4.getText();
+            addInString(text, b4.getText());
+        }
+        if (e.getSource() == b5) {
+            text = text + b5.getText();
+            addInString(text, b5.getText());
+        }
+        if (e.getSource() == b6) {
+            text = text + b6.getText();
+            addInString(text, b6.getText());
+        }
+        if (e.getSource() == b7) {
+            text = text + b7.getText();
+            addInString(text, b7.getText());
+        }
+        if (e.getSource() == b8) {
+            text = text + b8.getText();
+            addInString(text, b8.getText());
+        }
+        if (e.getSource() == b9) {
+            text = text + b9.getText();
+            addInString(text, b9.getText());
+        }
     }
 
     /* метод реализущий работу знака равно */
