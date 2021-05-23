@@ -2,9 +2,7 @@ package ru.evant.calculator_attempt_02;
 
 /* Ошибки:
         Деление:
-            Вывод лишних символов
             Реализовать проверку деления на 0
-       При вводе чисел, вывд лишних символов в поле resultText
  */
 
 /* Окно программы */
@@ -117,48 +115,6 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         /* +  Цифры */
         numberButtonListener(e);
-        /*
-        if (e.getSource() == b0) {
-            text = text + b0.getText();
-            addInString(text, b0.getText());
-        }
-        if (e.getSource() == b1) {
-            text = text + b1.getText();
-            addInString(text, b1.getText());
-        }
-        if (e.getSource() == b2) {
-            text = text + b2.getText();
-            addInString(text, b2.getText());
-        }
-        if (e.getSource() == b3) {
-            text = text + b3.getText();
-            addInString(text, b3.getText());
-        }
-        if (e.getSource() == b4) {
-            text = text + b4.getText();
-            addInString(text, b4.getText());
-        }
-        if (e.getSource() == b5) {
-            text = text + b5.getText();
-            addInString(text, b5.getText());
-        }
-        if (e.getSource() == b6) {
-            text = text + b6.getText();
-            addInString(text, b6.getText());
-        }
-        if (e.getSource() == b7) {
-            text = text + b7.getText();
-            addInString(text, b7.getText());
-        }
-        if (e.getSource() == b8) {
-            text = text + b8.getText();
-            addInString(text, b8.getText());
-        }
-        if (e.getSource() == b9) {
-            text = text + b9.getText();
-            addInString(text, b9.getText());
-        }
-        */
 
         /* операции */
         if (e.getSource() == clear) {
