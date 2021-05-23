@@ -1,9 +1,8 @@
 package ru.evant.calculator_attempt_02;
 
-/* Ошибки:
-        Добавить проверку перед математическими операциями и кнопки равно, если чисел нет -> ничего не делать
-        Деление:
-            Реализовать проверку деления на 0
+/*
+    Ошибка(Операции): 2две операции подряд
+    Ошибка(Операции): 1+1-1=0
  */
 
 /* Окно программы */
@@ -22,6 +21,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
     private final StringBuilder textResult = new StringBuilder();   // Конструктор строки
     private String text = "";                                       // пустая строка
+    private String tmp = "";                                        // временная строка
 
     private final JButton percent = new JButton("%");     // процент
     private final JButton b0 = new JButton("0");          // 0
@@ -45,6 +45,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     private final JButton change = new JButton("+/-");    // изменить знак числа - => + или + -> -
 
     private double A = 0;       // вещественное число
+    private double B = 0;
     private double dResult = 0; // результат - вещественное число
     private long iResult = 0;    // результат - целое число
     private char op;            // оператор (+, -, *, / ...)
@@ -178,6 +179,12 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         /* + Сложение */
         if (e.getSource() == add) {
             if(textResult.length() != 0) {
+                tmp = textResult.toString();
+                if (tmp.indexOf('+') != -1) {
+                    B = Double.parseDouble(text); // Преобразовать тект в число B
+                    dResult = A + B;
+                    printResult();
+                }
                 A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
                 inputTextField.setText(text + add.getText());
                 text = "";
@@ -190,6 +197,12 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         /* + Вычитание */
         if (e.getSource() == sub) {
             if(textResult.length() != 0) {
+                tmp = textResult.toString();
+                if (tmp.indexOf('-') != -1) {
+                    B = Double.parseDouble(text);
+                    dResult = A - B;
+                    printResult();
+                }
                 A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
                 inputTextField.setText(text + sub.getText());
                 text = "";
@@ -202,6 +215,12 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         /* + Умножение */
         if (e.getSource() == mul) {
             if(textResult.length() != 0) {
+                tmp = textResult.toString();
+                if (tmp.indexOf('*') != -1) {
+                    B = Double.parseDouble(text);
+                    dResult = A * B;
+                    printResult();
+                }
                 A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
                 inputTextField.setText(text + mul.getText());
                 text = "";
@@ -214,6 +233,14 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         /* + Деление */
         if (e.getSource() == div) {
             if(textResult.length() != 0) {
+                tmp = textResult.toString();
+                if (tmp.indexOf('/') != -1) {
+                    B = Double.parseDouble(text);
+                    if (B != 0) {
+                        dResult = A / B;
+                        printResult();
+                    }
+                }
                 A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
                 inputTextField.setText(text + div.getText());
                 text = "";
@@ -271,7 +298,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     /* + Слушатель кнопки вычислить (это знак равно (=)) */
     private void calculateButtonListener(ActionEvent e) {
         if (e.getSource() == res) {
-            double B; // Число B
+            //double B; // Число B
             // + сложение
             if (op == '+') {
                 B = Double.parseDouble(text); // Преобразовать тект в число B
