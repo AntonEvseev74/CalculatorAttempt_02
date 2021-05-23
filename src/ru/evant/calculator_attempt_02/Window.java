@@ -90,6 +90,8 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         configButton(add, 60, 60, 220, 350, font, true);
         configButton(res, 60, 130, 220, 420, font, true);
         configButton(change, 60, 60, 10, 140, font3, true);
+
+        //add.setIcon(new ImageIcon("src/assets/add.png"));  // установить картинку на кнопу
     }
 
     /* + настройка текстового поля */
