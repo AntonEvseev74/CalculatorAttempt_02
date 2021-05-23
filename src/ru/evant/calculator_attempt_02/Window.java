@@ -1,6 +1,7 @@
 package ru.evant.calculator_attempt_02;
 
 /* Ошибки:
+        Добавить проверку перед математическими операциями и кнопки равно, если чисел нет -> ничего не делать
         Деление:
             Реализовать проверку деления на 0
  */
@@ -134,23 +135,28 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
         /* + Изменить знак числа (+/-) (5 = -5, и наоборот -5 = 5) */
         if (e.getSource() == change) {
-            A = Double.parseDouble(text);
-            A *= -1;
-            textResult.setLength(0);
-            text = String.valueOf(A);
-            addInString(text, text);
+            /* если строка не пустая, то выполняем операцию, иначе ничеги ни делаем */
+            if(textResult.length() != 0) {
+                A = Double.parseDouble(text);
+                A *= -1;
+                textResult.setLength(0);
+                text = String.valueOf(A);
+                addInString(text, text);
+            }
         }
 
         /* + Процент (%) (100% = 1 (100/100=1)) */
         if (e.getSource() == percent) {
-            A = Double.parseDouble(text);
-            A /= 100;
-            textResult.setLength(0);
-            text = String.valueOf(A);
-            addInString(text, text);
+            if(textResult.length() != 0) {
+                A = Double.parseDouble(text);
+                A /= 100;
+                textResult.setLength(0);
+                text = String.valueOf(A);
+                addInString(text, text);
+            }
         } // процент ( 10% от 100 = 10)
 
-        /* Точка */
+        /* + Точка */
         if (e.getSource() == point) {
             /* еслив строке нет символа точка (.) мы добавляем точку в строку, иначе ничего ни делаем */
             if(text.indexOf('.') == -1) {
@@ -161,50 +167,60 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
         /* + Backspace - удалить последний введенный символ */
         if (e.getSource() == bac) {
-            text = deleteLastSymbol(text);
-            int lastChar = textResult.length()-1;
-            textResult.deleteCharAt(lastChar);          // удалить последний символ в строке
-            addInString(text,"");
+            if(textResult.length() != 0) {
+                text = deleteLastSymbol(text);
+                int lastChar = textResult.length() - 1;
+                textResult.deleteCharAt(lastChar);          // удалить последний символ в строке
+                addInString(text, "");
+            }
         }
 
         /* + Сложение */
         if (e.getSource() == add) {
-            A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            inputTextField.setText(text + add.getText());
-            text = "";
-            op = '+';
-            textResult.append("+");
-            outputTextField.setText(textResult.toString());
+            if(textResult.length() != 0) {
+                A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
+                inputTextField.setText(text + add.getText());
+                text = "";
+                op = '+';
+                textResult.append("+");
+                outputTextField.setText(textResult.toString());
+            }
         }
 
         /* + Вычитание */
         if (e.getSource() == sub) {
-            A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            inputTextField.setText(text + sub.getText());
-            text = "";
-            op = '-';
-            textResult.append("-");
-            outputTextField.setText(textResult.toString());
+            if(textResult.length() != 0) {
+                A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
+                inputTextField.setText(text + sub.getText());
+                text = "";
+                op = '-';
+                textResult.append("-");
+                outputTextField.setText(textResult.toString());
+            }
         }
 
         /* + Умножение */
         if (e.getSource() == mul) {
-            A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            inputTextField.setText(text + mul.getText());
-            text = "";
-            op = '*';
-            textResult.append("*");
-            outputTextField.setText(textResult.toString());
+            if(textResult.length() != 0) {
+                A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
+                inputTextField.setText(text + mul.getText());
+                text = "";
+                op = '*';
+                textResult.append("*");
+                outputTextField.setText(textResult.toString());
+            }
         }
 
         /* + Деление */
         if (e.getSource() == div) {
-            A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            inputTextField.setText(text + div.getText());
-            text = "";
-            op = '/';
-            textResult.append("/");
-            outputTextField.setText(textResult.toString());
+            if(textResult.length() != 0) {
+                A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
+                inputTextField.setText(text + div.getText());
+                text = "";
+                op = '/';
+                textResult.append("/");
+                outputTextField.setText(textResult.toString());
+            }
         }
     }
 
@@ -277,8 +293,10 @@ public class Window extends JFrame implements WindowListener, ActionListener {
             // / деление
             if (op == '/') {
                 B = Double.parseDouble(text);
-                dResult = A / B;
-                printResult();
+                if (B != 0) {
+                    dResult = A / B;
+                    printResult();
+                }
             }
             // % процент
             if (op == '%') {
