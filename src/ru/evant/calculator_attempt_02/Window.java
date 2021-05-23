@@ -18,10 +18,12 @@ import java.awt.event.WindowListener;
 
 public class Window extends JFrame implements WindowListener, ActionListener {
 
-    private final TextField textField = new TextField();       // текстовое поле
-    private final TextField resultText = new TextField(); ////////////////////////////////////////////
-    private final StringBuilder textInResultText = new StringBuilder();
-    private String text = "";                                  // пустая строка
+    private final TextField inputTextField = new TextField();        // Текстовое поле ввода данных
+    private final TextField outputTextField = new TextField();       // Текстовое поле вывода результата
+
+    private final StringBuilder textResult = new StringBuilder();   // Конструктор строки
+    private String text = "";                                       // пустая строка
+
     private final JButton percent = new JButton("%");     // процент
     private final JButton b0 = new JButton("0");          // 0
     private final JButton point = new JButton(".");       // запятая
@@ -49,12 +51,12 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     private char op;            // оператор (+, -, *, / ...)
 
     public Window() {
-        /* Шрифты */
+        /* + Шрифты */
         Font font = new Font("Impact", Font.BOLD, 40); // шрифт, жирный, размер
         Font font2 = new Font("Impact", Font.BOLD, 35);// шрифт, жирный, размер
         Font font3 = new Font("Impact", Font.BOLD, 15);// шрифт, жирный, размер
 
-        /* Окно программы */
+        /* + Окно программы */
         setLayout(null);
         setSize(305, 600);         // размер окна
         setVisible(true);                        // отобразить на экране
@@ -62,11 +64,11 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         setLocation(300, 150);             // Расположение окна
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Нажатие на крестик закрывает программу
 
-        /* Текстовые поля */
-        configTextField(textField, 265, 60, 10, 10, font, true, true);
-        configTextField(resultText, 265, 60, 10, 70, font3, true, true);
+        /* + Текстовые поля */
+        configTextField(inputTextField, 265, 60, 10, 10, font, true, true);
+        configTextField(outputTextField, 265, 60, 10, 70, font3, true, true);
 
-        /* Кнопки */
+        /* + Кнопки */
         configButton(percent, 60, 60, 10, 490, font2, true);
         configButton(b0, 60, 60, 80, 490, font, true);
         configButton(point, 60, 60, 150, 490, font, true);
@@ -89,7 +91,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         configButton(change, 60, 60, 10, 140, font3, true);
     }
 
-    /* настройка текстового поля */
+    /* + настройка текстового поля */
     public void configTextField(TextField name, int width, int height, int xPosition, int yPosition, Font font, boolean visible, boolean editable) {
         name.setSize(width, height);            // размер текстового поля
         name.setLocation(xPosition, yPosition); // позиция текстового поля в окне
@@ -99,7 +101,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         add(name);                              // добавить в окно
     }
 
-    /* настройка кнопки */
+    /* + настройка кнопки */
     public void configButton(JButton name, int width, int height, int xPosition, int yPosition, Font font, boolean visible) {
         name.setSize(width, height);            // размер кнопки
         name.setLocation(xPosition, yPosition); // позиция кнопки в окне
@@ -109,150 +111,189 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         name.addActionListener(this);        // подключить к обработчику событий
     }
 
-    // обработчик событий
+    /* обработчик событий */
     @Override
     public void actionPerformed(ActionEvent e) {
-
         // Цифры
         if (e.getSource() == b0) {
             text = text + b0.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b0.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b1) {
             text = text + b1.getText();
+            addInString(text, b1.getText());
+
+            /*
             textField.setText(text);
             textInResultText.append(text);
             resultText.setText(textInResultText.toString());
+             */
         }
         if (e.getSource() == b2) {
             text = text + b2.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b2.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b3) {
             text = text + b3.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b3.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b4) {
             text = text + b4.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b4.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b5) {
             text = text + b5.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b5.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b6) {
             text = text + b6.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b6.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b7) {
             text = text + b7.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b7.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b8) {
             text = text + b8.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b8.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == b9) {
             text = text + b9.getText();
-            textField.setText(text);
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            addInString(text, b9.getText());
+            /*
+            inputTextField.setText(text);
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
+
+             */
         }
         if (e.getSource() == clear) {
             text = "";
-            textField.setText(text);
-            textInResultText.setLength(0);//append(text);
-            resultText.setText(textInResultText.toString());
+            inputTextField.setText(text);
+            textResult.setLength(0);//append(text);
+            outputTextField.setText(textResult.toString());
         }
 
         /* операции */
         if (e.getSource() == change) {
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
             A = Double.parseDouble(text);
             A *= -1;
             if (A % 1 == 0) {
                 iResult = (int) A;
-                textField.setText(String.valueOf(iResult));
+                inputTextField.setText(String.valueOf(iResult));
                 text = String.valueOf(iResult);
             } else {
                 dResult = A;
-                textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
+                inputTextField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
                 text = String.valueOf(dResult);
             }
-            textInResultText.setLength(0); // доработать
-            textInResultText.append(text);
-            resultText.setText(textInResultText.toString());
+            textResult.setLength(0); // доработать
+            textResult.append(text);
+            outputTextField.setText(textResult.toString());
         } // изменить + на - и наоборот
 
         if (e.getSource() == percent) {
             // написать код
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            textField.setText(text + percent.getText());
+            inputTextField.setText(text + percent.getText());
             text = "";
             op = '%';
         } // процент ( 10% от 100 = 10)
 
         if (e.getSource() == point) {
             text = text + point.getText();
-            textField.setText(text);
+            inputTextField.setText(text);
         } // точка
 
         if (e.getSource() == bac) {
             text = deleteLastSymbol(text);
-            textField.setText(text);
+            inputTextField.setText(text);
         } // bac - backspace - удалить последний символ
 
         if (e.getSource() == add) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            textField.setText(text + add.getText());
+            inputTextField.setText(text + add.getText());
             text = "";
             op = '+';
-            textInResultText.append("+");
-            resultText.setText(textInResultText.toString());
+            textResult.append("+");
+            outputTextField.setText(textResult.toString());
         } // add - сложение
 
         if (e.getSource() == sub) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            textField.setText(text + sub.getText());
+            inputTextField.setText(text + sub.getText());
             text = "";
             op = '-';
-            textInResultText.append("-");
-            resultText.setText(textInResultText.toString());
+            textResult.append("-");
+            outputTextField.setText(textResult.toString());
         } // sub - вычитание
 
         if (e.getSource() == mul) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            textField.setText(text + mul.getText());
+            inputTextField.setText(text + mul.getText());
             text = "";
             op = '*';
-            textInResultText.append("*");
-            resultText.setText(textInResultText.toString());
+            textResult.append("*");
+            outputTextField.setText(textResult.toString());
         } // mul - умножение
 
         if (e.getSource() == div) {
             A = Double.parseDouble(text); // перевести строку в число и присвоить полученное значение переменной A
-            textField.setText(text + div.getText());
+            inputTextField.setText(text + div.getText());
             text = "";
             op = '/';
-            textInResultText.append("/");
-            resultText.setText(textInResultText.toString());
+            textResult.append("/");
+            outputTextField.setText(textResult.toString());
         } // div - деление
 
 
@@ -317,21 +358,38 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
     /* установить текст в текстовое поле (resultText) */
     private void setTextToResultField () {
-        textInResultText.append("=");
-        textInResultText.append(text);
-        resultText.setText(textInResultText.toString());
+        textResult.append("=");
+        textResult.append(text);
+        outputTextField.setText(textResult.toString());
+    }
+
+
+    private void addInString(String text, String builder) {
+        textResult.append(builder);         // Добавить в строку новый элемент
+        addInInputTextField(text);          // Вывести строку в поле ввода
+        addInOutputTextField(textResult);   // Вывести строку в поле вывода
+    }
+
+    /* Вывести строку в поле ввода */
+    private void addInInputTextField(String text) {
+        inputTextField.setText(text);
+    }
+
+    /* Вывести строку в поле вывода */
+    private void addInOutputTextField(StringBuilder textResult) {
+        outputTextField.setText(textResult.toString());
     }
 
     /* установить текст в текстовое поле (textField), если результат - это целое число */
     private void setTextToTextFieldIfInteger () {
         iResult = (int) dResult;
-        textField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
+        inputTextField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(iResult);
     }
 
     /* установить текст в текстовое поле (textField), если результат - это вещественное число */
     private void setTextToTextFieldIfDouble () {
-        textField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
+        inputTextField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(dResult);
     }
 
