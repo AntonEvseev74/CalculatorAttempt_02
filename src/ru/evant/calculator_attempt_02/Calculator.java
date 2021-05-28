@@ -9,12 +9,9 @@ package ru.evant.calculator_attempt_02;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
-public class Window extends JFrame implements WindowListener, ActionListener {
+public class Calculator extends JFrame implements WindowListener, ActionListener, KeyListener {
 
     private final TextField inputTextField = new TextField();        // Текстовое поле ввода данных
     private final TextField outputTextField = new TextField();       // Текстовое поле вывода результата
@@ -43,6 +40,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     private final JButton add = new JButton("+");         // add - addition       - сложение
     private final JButton res = new JButton("=");         // res - result         - результат
     private final JButton change = new JButton("+/-");    // изменить знак числа - => + или + -> -
+    private final JButton equation = new JButton("x²+x");
 
     private double A = 0;       // вещественное число
     private double B = 0;
@@ -51,7 +49,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     private char op;            // оператор (+, -, *, / ...)
 
     /* + Главное окно программы */
-    public Window() {
+    public Calculator() {
         /* + Шрифты */
         Font font = new Font("Impact", Font.BOLD, 40); // шрифт, жирный, размер
         Font font2 = new Font("Impact", Font.BOLD, 35);// шрифт, жирный, размер
@@ -63,7 +61,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         setVisible(true);                        // отобразить на экране
         setResizable(false);                     // запретить игменять размер окна
         setLocation(300, 150);             // Расположение окна
-        setDefaultCloseOperation(EXIT_ON_CLOSE); // Нажатие на крестик закрывает программу
+        setDefaultCloseOperation(Calculator.EXIT_ON_CLOSE); // Нажатие на крестик закрывает программу
 
         /* + Текстовые поля */
         configTextField(inputTextField, 265, 60, 10, 10, font, true, true);
@@ -90,6 +88,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         configButton(add, 60, 60, 220, 350, font, true);
         configButton(res, 60, 130, 220, 420, font, true);
         configButton(change, 60, 60, 10, 140, font3, true);
+        configButton(equation, 130, 60, 80, 140, font, true);
     }
 
     /* + настройка текстового поля */
@@ -127,6 +126,13 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
     /* + Слушатель кнопок математических операций (Обработка нажатия кнопок: +, -, *, /, ., % и т.д.) */
     private void operationButtonListener(ActionEvent e) {
+
+        /* Квадратные уравнения */
+        if (e.getSource() == equation) {
+            QuadraticEquation quadraticEquation = new QuadraticEquation();
+           // quadraticEquation.start();
+        }
+
         /* + C - Clear - Очистить все поля */
         if (e.getSource() == clear) {
             textResult.setLength(0);    // Очистка строки
@@ -137,7 +143,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         /* + Изменить знак числа (+/-) (5 = -5, и наоборот -5 = 5) */
         if (e.getSource() == change) {
             /* если строка не пустая, то выполняем операцию, иначе ничеги ни делаем */
-            if(textResult.length() != 0) {
+            if (textResult.length() != 0) {
                 A = Double.parseDouble(text);
                 A *= -1;
                 textResult.setLength(0);
@@ -148,7 +154,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
         /* + Процент (%) (100% = 1 (100/100=1)) */
         if (e.getSource() == percent) {
-            if(textResult.length() != 0) {
+            if (textResult.length() != 0) {
                 A = Double.parseDouble(text);
                 A /= 100;
                 textResult.setLength(0);
@@ -160,7 +166,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         /* + Точка */
         if (e.getSource() == point) {
             /* еслив строке нет символа точка (.) мы добавляем точку в строку, иначе ничего ни делаем */
-            if(text.indexOf('.') == -1) {
+            if (text.indexOf('.') == -1) {
                 text = text + point.getText();
                 addInString(text, point.getText());
             }
@@ -168,7 +174,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
         /* + Backspace - удалить последний введенный символ */
         if (e.getSource() == bac) {
-            if(textResult.length() != 0) {
+            if (textResult.length() != 0) {
                 text = deleteLastSymbol(text);
                 int lastChar = textResult.length() - 1;
                 textResult.deleteCharAt(lastChar);          // удалить последний символ в строке
@@ -177,8 +183,8 @@ public class Window extends JFrame implements WindowListener, ActionListener {
         }
 
         /* + Сложение */
-        if (e.getSource() == add) {
-            if(textResult.length() != 0) {
+        if (e.getSource() == add) {         // если нажата кнопка +
+            if (textResult.length() != 0) {  // если textResult не пустой
                 tmp = textResult.toString();
                 if (tmp.indexOf('+') != -1) {
                     B = Double.parseDouble(text); // Преобразовать тект в число B
@@ -196,7 +202,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
         /* + Вычитание */
         if (e.getSource() == sub) {
-            if(textResult.length() != 0) {
+            if (textResult.length() != 0) {
                 tmp = textResult.toString();
                 if (tmp.indexOf('-') != -1) {
                     B = Double.parseDouble(text);
@@ -214,7 +220,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
         /* + Умножение */
         if (e.getSource() == mul) {
-            if(textResult.length() != 0) {
+            if (textResult.length() != 0) {
                 tmp = textResult.toString();
                 if (tmp.indexOf('*') != -1) {
                     B = Double.parseDouble(text);
@@ -232,7 +238,7 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
         /* + Деление */
         if (e.getSource() == div) {
-            if(textResult.length() != 0) {
+            if (textResult.length() != 0) {
                 tmp = textResult.toString();
                 if (tmp.indexOf('/') != -1) {
                     B = Double.parseDouble(text);
@@ -335,17 +341,17 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     }
 
     /* Вывести результат */
-    private void printResult () {
+    private void printResult() {
         checkingForAnInteger();
         setTextToResultField();
     }
 
     /*
-    * Блок
-    * если целое число - вывод целого числа (без точки и знаков после точки)
-    * иначе - вывод вещественного числа (с точкой и знаками после точки)
-    */
-    private void checkingForAnInteger (){
+     * Блок
+     * если целое число - вывод целого числа (без точки и знаков после точки)
+     * иначе - вывод вещественного числа (с точкой и знаками после точки)
+     */
+    private void checkingForAnInteger() {
         if (dResult % 1 == 0) { // если остаток от деления равен 0
             setTextToTextFieldIfInteger();
         } else {
@@ -371,21 +377,21 @@ public class Window extends JFrame implements WindowListener, ActionListener {
     }
 
     /* установить текст в текстовое поле (resultText) */
-    private void setTextToResultField () {
+    private void setTextToResultField() {
         textResult.append("=");
         textResult.append(text);
         outputTextField.setText(textResult.toString());
     }
 
     /* Установить текст в текстовое поле (textField), если результат - это целое число */
-    private void setTextToTextFieldIfInteger () {
+    private void setTextToTextFieldIfInteger() {
         iResult = (long) dResult;
         inputTextField.setText(String.valueOf(iResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(iResult);
     }
 
     /* Установить текст в текстовое поле (textField), если результат - это вещественное число */
-    private void setTextToTextFieldIfDouble () {
+    private void setTextToTextFieldIfDouble() {
         inputTextField.setText(String.valueOf(dResult)); // перевести число в строку и установить строку в текстовое поле
         text = String.valueOf(dResult);
     }
@@ -428,6 +434,21 @@ public class Window extends JFrame implements WindowListener, ActionListener {
 
     @Override
     public void windowDeactivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 } // end Window
